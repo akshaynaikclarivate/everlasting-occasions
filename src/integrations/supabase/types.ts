@@ -14,6 +14,200 @@ export type Database = {
   }
   public: {
     Tables: {
+      gallery_images: {
+        Row: {
+          alt: string
+          created_at: string
+          display_order: number | null
+          id: string
+          is_visible: boolean | null
+          src: string
+        }
+        Insert: {
+          alt: string
+          created_at?: string
+          display_order?: number | null
+          id?: string
+          is_visible?: boolean | null
+          src: string
+        }
+        Update: {
+          alt?: string
+          created_at?: string
+          display_order?: number | null
+          id?: string
+          is_visible?: boolean | null
+          src?: string
+        }
+        Relationships: []
+      }
+      schedule_days: {
+        Row: {
+          created_at: string
+          date: string
+          day_name: string
+          display_order: number | null
+          id: string
+          is_visible: boolean | null
+        }
+        Insert: {
+          created_at?: string
+          date: string
+          day_name: string
+          display_order?: number | null
+          id?: string
+          is_visible?: boolean | null
+        }
+        Update: {
+          created_at?: string
+          date?: string
+          day_name?: string
+          display_order?: number | null
+          id?: string
+          is_visible?: boolean | null
+        }
+        Relationships: []
+      }
+      schedule_items: {
+        Row: {
+          created_at: string
+          day_id: string
+          description: string | null
+          display_order: number | null
+          id: string
+          time: string
+          title: string
+        }
+        Insert: {
+          created_at?: string
+          day_id: string
+          description?: string | null
+          display_order?: number | null
+          id?: string
+          time: string
+          title: string
+        }
+        Update: {
+          created_at?: string
+          day_id?: string
+          description?: string | null
+          display_order?: number | null
+          id?: string
+          time?: string
+          title?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "schedule_items_day_id_fkey"
+            columns: ["day_id"]
+            isOneToOne: false
+            referencedRelation: "schedule_days"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      story_events: {
+        Row: {
+          created_at: string
+          date: string
+          description: string
+          display_order: number | null
+          id: string
+          image: string | null
+          is_visible: boolean | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          date: string
+          description: string
+          display_order?: number | null
+          id?: string
+          image?: string | null
+          is_visible?: boolean | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          date?: string
+          description?: string
+          display_order?: number | null
+          id?: string
+          image?: string | null
+          is_visible?: boolean | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
+      wedding_events: {
+        Row: {
+          address: string
+          created_at: string
+          date: string
+          description: string | null
+          display_order: number | null
+          id: string
+          is_visible: boolean | null
+          map_url: string | null
+          time: string
+          title: string
+          updated_at: string
+          venue: string
+        }
+        Insert: {
+          address: string
+          created_at?: string
+          date: string
+          description?: string | null
+          display_order?: number | null
+          id?: string
+          is_visible?: boolean | null
+          map_url?: string | null
+          time: string
+          title: string
+          updated_at?: string
+          venue: string
+        }
+        Update: {
+          address?: string
+          created_at?: string
+          date?: string
+          description?: string | null
+          display_order?: number | null
+          id?: string
+          is_visible?: boolean | null
+          map_url?: string | null
+          time?: string
+          title?: string
+          updated_at?: string
+          venue?: string
+        }
+        Relationships: []
+      }
       wedding_settings: {
         Row: {
           created_at: string
@@ -43,10 +237,16 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "user"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -173,6 +373,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "user"],
+    },
   },
 } as const
