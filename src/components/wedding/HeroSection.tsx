@@ -1,4 +1,5 @@
 import CountdownTimer from './CountdownTimer';
+import heroBackground from '@/assets/hero-background.jpg';
 
 interface HeroSectionProps {
   coupleName: string;
@@ -8,6 +9,7 @@ interface HeroSectionProps {
 }
 
 const HeroSection = ({ coupleName, partnerName, weddingDate, backgroundImage }: HeroSectionProps) => {
+  const bgImage = backgroundImage || heroBackground;
   const formatDate = (date: Date) => {
     return date.toLocaleDateString('en-US', {
       weekday: 'long',
@@ -21,16 +23,12 @@ const HeroSection = ({ coupleName, partnerName, weddingDate, backgroundImage }: 
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0">
-        {backgroundImage ? (
-          <img
-            src={backgroundImage}
-            alt="Wedding background"
-            className="w-full h-full object-cover"
-          />
-        ) : (
-          <div className="w-full h-full bg-gradient-to-b from-sage-light/30 via-background to-background" />
-        )}
-        <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/80 to-background" />
+        <img
+          src={bgImage}
+          alt="Wedding background"
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/70 to-background" />
       </div>
 
       {/* Floating decorative elements */}
