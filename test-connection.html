@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Supabase Connection Test</title>
+</head>
+<body>
+    <h1>Testing Supabase Connection</h1>
+    <div id="result"></div>
+    
+    <script type="module">
+        const SUPABASE_URL = "https://mtmsribrpeqcyzamcqvn.supabase.co";
+        const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im10bXNyaWJycGVxY3l6YW1jcXZuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjYzNzYzMjQsImV4cCI6MjA4MTk1MjMyNH0.JcXSHEp9YBJQ28rs9LOpP72-EnVNDfDrRJrNaEJ5vtg";
+        
+        const resultDiv = document.getElementById('result');
+        resultDiv.innerHTML = '<p>Testing connection...</p>';
+        
+        try {
+            const response = await fetch(`${SUPABASE_URL}/rest/v1/wedding_settings?select=*`, {
+                headers: {
+                    'apikey': SUPABASE_KEY,
+                    'Authorization': `Bearer ${SUPABASE_KEY}`,
+                }
+            });
+            
+            if (response.ok) {
+                const data = await response.json();
+                resultDiv.innerHTML = `
+                    <p style="color: green;">✓ Connection successful!</p>
+                    <p>Data received: ${JSON.stringify(data, null, 2)}</p>
+                `;
+            } else {
+                const error = await response.text();
+                resultDiv.innerHTML = `
+                    <p style="color: red;">✗ Connection failed</p>
+                    <p>Status: ${response.status}</p>
+                    <p>Error: ${error}</p>
+                `;
+            }
+        } catch (error) {
+            resultDiv.innerHTML = `
+                <p style="color: red;">✗ Connection error</p>
+                <p>${error.message}</p>
+            `;
+        }
+    </script>
+</body>
+</html>

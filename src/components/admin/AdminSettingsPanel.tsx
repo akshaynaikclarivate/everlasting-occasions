@@ -130,7 +130,7 @@ const AdminSettingsPanel = () => {
                   ...prev,
                   couple: { ...prev.couple, name1: e.target.value }
                 }))}
-                placeholder="e.g., Priya"
+                placeholder="e.g., Simran"
               />
             </div>
             <div className="space-y-2">
@@ -141,7 +141,7 @@ const AdminSettingsPanel = () => {
                   ...prev,
                   couple: { ...prev.couple, name2: e.target.value }
                 }))}
-                placeholder="e.g., Arjun"
+                placeholder="e.g., Akshay"
               />
             </div>
           </div>

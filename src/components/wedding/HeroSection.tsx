@@ -72,12 +72,6 @@ const HeroSection = ({ coupleName, partnerName, weddingDate, backgroundImage }: 
         </div>
 
         {/* Scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 opacity-0 animate-fade-in" style={{ animationDelay: '1.5s' }}>
-          <div className="flex flex-col items-center gap-2 text-muted-foreground/50">
-            <span className="text-xs tracking-[0.2em] uppercase">Scroll</span>
-            <div className="w-px h-8 bg-gradient-to-b from-muted-foreground/50 to-transparent animate-pulse-soft" />
-          </div>
-        </div>
       </div>
     </section>
   );

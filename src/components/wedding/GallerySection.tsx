@@ -57,21 +57,17 @@ const GallerySection = ({
         </div>
 
         {/* Gallery Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4 max-w-6xl mx-auto">
           {images.map((image, index) => (
             <div
               key={image.id}
-              className={`relative group cursor-pointer overflow-hidden rounded-sm ${
-                index === 0 ? 'col-span-2 row-span-2' : ''
-              }`}
+              className="relative group cursor-pointer overflow-hidden rounded-sm aspect-square"
               onClick={() => openLightbox(index)}
             >
               <img
                 src={image.src}
                 alt={image.alt}
-                className={`w-full object-cover transition-transform duration-700 group-hover:scale-110 ${
-                  index === 0 ? 'h-full min-h-[300px] md:min-h-[400px]' : 'h-40 md:h-48'
-                }`}
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               />
               <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/10 transition-colors duration-300" />
               <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
